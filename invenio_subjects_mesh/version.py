@@ -12,4 +12,4 @@ This file is imported by ``invenio_subjects_mesh.__init__``,
 and parsed by ``setup.py``.
 """
 
-__version__ = '2021.6.18'
+__version__ = '2021.6.19'
