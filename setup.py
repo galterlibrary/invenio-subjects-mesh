@@ -60,7 +60,7 @@ setup(
     keywords='invenio TODO',
     license='MIT',
     author='Northwestern University',
-    author_email='guillaume.viger@northwestern.edu',
+    author_email='DL_FSM_GDS@e.northwestern.edu',
     url='https://github.com/galterlibrary/invenio-subjects-mesh',
     packages=packages,
     zip_safe=False,
