@@ -1,4 +1,7 @@
 subjects:
   pid-type: sub
-  data-file:
-    mesh: subjects_mesh.yaml
+  subtypes:
+    - id: mesh
+      data-file: subjects_mesh.yaml
+      label: MeSH
+      prefix_url: https://id.nlm.nih.gov/mesh/

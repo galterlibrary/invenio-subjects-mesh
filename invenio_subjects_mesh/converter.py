@@ -21,9 +21,6 @@ class MeSHConverter:
         for term in self._reader:
             yield {
                 "id": term['UI'],
-                "props": {
-                    "subjectScheme": "MeSH"
-                },
                 "tags": ["mesh"],
                 "title": {
                     "en": term['MH']

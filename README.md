@@ -14,9 +14,10 @@ This will add it to your Pipfile.
 
 ### Versions
 
-This repository follows year-semantic versioning:
+This repository follows [calendar versioning](https://calver.org/):
 
-`2021.06.18` is both a valid semantic version and an indicator of the year corresponding to the loaded MeSH terms.
+`2021.06.18` is both a valid semantic version and an indicator of the year-month corresponding to the loaded MeSH terms.
+
 
 ## Usage
 
@@ -39,7 +40,7 @@ When a new list of MeSH term comes out, this package should be updated. Here we 
     pipenv run invenio-subjects-mesh
 
 This will
-1- Download the new list (TODO)
+1- Download the new list (TODO - For now download it manually and place it in `invenio_subjects_mesh/download/data/`)
 2- Read it filtering for topics
 3- Convert terms to InvenioRDM subjects format
 3- Write those to `invenio_subjects_mesh/vocabularies/subjects_mesh.yaml` file

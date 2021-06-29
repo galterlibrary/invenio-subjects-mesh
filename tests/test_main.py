@@ -77,9 +77,6 @@ def test_converter():
     assert objects == [
         {
             "id": 'D005368',
-            "props": {
-                "subjectScheme": "MeSH"
-            },
             "tags": ["mesh"],
             "title": {
                 "en": 'Filariasis'
@@ -93,9 +90,6 @@ def test_write():
     entries = [
         {
             "id": 'D000015',
-            "props": {
-                "subjectScheme": "MeSH"
-            },
             "tags": ["mesh"],
             "title": {
                 "en": 'Abnormalities, Multiple'
@@ -103,9 +97,6 @@ def test_write():
         },
         {
             "id": 'D000068098',
-            "props": {
-                "subjectScheme": "MeSH"
-            },
             "tags": ["mesh"],
             "title": {
                 "en": 'Seed Bank'
@@ -113,9 +104,6 @@ def test_write():
         },
         {
             "id": 'D005368',
-            "props": {
-                "subjectScheme": "MeSH"
-            },
             "tags": ["mesh"],
             "title": {
                 "en": 'Filariasis'
@@ -128,3 +116,5 @@ def test_write():
     with open(filepath) as f:
         read_entries = yaml.safe_load(f)
     assert entries == read_entries
+
+    filepath.unlink(missing_ok=True)
