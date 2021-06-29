@@ -19,8 +19,9 @@ jobs:
       - name: Build package
         run: |
           python setup.py compile_catalog sdist bdist_wheel
-      - name: pypi-publish
+      - name: Publish to Test PyPI
         uses: pypa/gh-action-pypi-publish@v1.3.1
         with:
           user: __token__
-          password: ${{ secrets.pypi_token }}
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
