@@ -117,4 +117,7 @@ def test_write():
         read_entries = yaml.safe_load(f)
     assert entries == read_entries
 
-    filepath.unlink(missing_ok=True)
+    try:
+        filepath.unlink()  # TODO: add missing_ok=True starting python 3.8+
+    except FileNotFoundError:
+        pass

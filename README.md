@@ -31,9 +31,9 @@ For instance administrators, after you have installed the extension as per the s
 
 When a new list of MeSH term comes out, this package should be updated. Here we show how.
 
-0- Make sure you have cloned this package and installed it locally:
+0- Make sure you have cloned this package and installed it locally with the `all` extra:
 
-    pipenv run pip install -e .
+    pipenv run pip install -e .[all]
 
 1- Update:
 

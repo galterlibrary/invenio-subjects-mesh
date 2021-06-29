@@ -14,7 +14,7 @@ set -o errexit
 # Quit on unbound symbols
 set -o nounset
 
-python -m check_manifest --ignore ".*-requirements.txt" --ignore "*.bin"
+python -m check_manifest
 python -m pytest
 tests_exit_code=$?
 exit "$tests_exit_code"
