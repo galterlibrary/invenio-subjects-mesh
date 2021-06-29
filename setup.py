@@ -13,7 +13,7 @@ import os
 from setuptools import find_packages, setup
 
 readme = open('README.md').read()
-history = open('CHANGES.rst').read()
+history = open('CHANGES.md').read()
 
 tests_require = [
     'pytest-invenio>=1.4.0',
@@ -57,7 +57,8 @@ setup(
     version=version,
     description=__doc__,
     long_description=readme + '\n\n' + history,
-    keywords='invenio TODO',
+    long_description_content_type='text/markdown',
+    keywords='invenio inveniordm subjects MeSH',
     license='MIT',
     author='Northwestern University',
     author_email='DL_FSM_GDS@e.northwestern.edu',
@@ -91,6 +92,5 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
-        'Development Status :: 1 - Planning',
     ],
 )
