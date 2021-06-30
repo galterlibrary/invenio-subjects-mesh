@@ -39,15 +39,14 @@ When a new list of MeSH term comes out, this package should be updated. Here we 
 
     pipenv run invenio-subjects-mesh
 
-This will
-1- Download the new list (TODO - For now download it manually and place it in `invenio_subjects_mesh/download/data/`)
-2- Read it filtering for topics
-3- Convert terms to InvenioRDM subjects format
-3- Write those to `invenio_subjects_mesh/vocabularies/subjects_mesh.yaml` file
+   This will
 
-Finally, when you are happy with the list:
+   1- Download the new list (TODO - For now download it manually and place it in `invenio_subjects_mesh/download/data/`)
+   2- Read it filtering for topics
+   3- Convert terms to InvenioRDM subjects format
+   4- Write those to `invenio_subjects_mesh/vocabularies/subjects_mesh.yaml` file
 
-2- Bump the version in `invenio_subjects_mesh/version.py` and release it.
+2- When you are happy with the list, bump the version in `invenio_subjects_mesh/version.py` and release it.
 
 **Note**
 
