@@ -13,7 +13,7 @@ from pathlib import Path
 import click
 
 from .converter import MeSHConverter
-from .download import download_terms
+from .download import download_mesh
 from .reader import MeSHReader
 from .writer import write_yaml
 
@@ -21,9 +21,7 @@ from .writer import write_yaml
 @click.command()
 def main():
     """Generate new subjects_mesh.yaml file."""
-    # TODO: fetch via URL filepath = download_terms(url)
-    # local for now
-    filepath = Path(__file__).parent / "download/data/d2021.bin"
+    filepath = download_mesh()
 
     reader = MeSHReader(filepath, filter='topics')
 
