@@ -6,14 +6,23 @@
 # modify it under the terms of the MIT License; see LICENSE file for more
 # details.
 
-# TODO: Place this file in download/ subpkg
-
 """Download MeSH file."""
+
+import shutil
+from pathlib import Path
 
 import requests
 
 
-def download_terms(url):
+def download_mesh():
     """Download MeSH file."""
-    requests.get(url)
-    # store in download/data/
+    # 2021 ASCII MeSH terms
+    url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/asciimesh/d2021.bin"  # noqa
+    filename = url.rsplit('/', 1)[-1]
+    filepath = Path(__file__).parent / filename
+
+    with requests.get(url, stream=True) as req:
+        with open(filepath, 'wb') as f:
+            shutil.copyfileobj(req.raw, f)
+
+    return filepath

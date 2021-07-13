@@ -16,13 +16,15 @@ class MeSHConverter:
         """Constructor."""
         self._reader = reader
 
+    def generate_id(self, identifier):
+        """Generate URI id."""
+        return f"https://id.nlm.nih.gov/mesh/{identifier}"
+
     def __iter__(self):
         """Iterate over converted entries."""
         for term in self._reader:
             yield {
-                "id": term['UI'],
-                "tags": ["mesh"],
-                "title": {
-                    "en": term['MH']
-                }
+                "id": self.generate_id(term['UI']),
+                "scheme": "MeSH",
+                "subject": term['MH']
             }

@@ -76,11 +76,9 @@ def test_converter():
 
     assert objects == [
         {
-            "id": 'D005368',
-            "tags": ["mesh"],
-            "title": {
-                "en": 'Filariasis'
-            }
+            "id": 'https://id.nlm.nih.gov/mesh/D005368',
+            "scheme": "MeSH",
+            "subject": "Filariasis"
         }
     ]
 
