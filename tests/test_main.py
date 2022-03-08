@@ -1,18 +1,55 @@
 """Test MeSH extractor."""
 
+from collections import namedtuple
+from contextlib import contextmanager
 from pathlib import Path
+from unittest import mock
 
 import pytest
 import yaml
 
 from invenio_subjects_mesh.converter import MeSHConverter
+from invenio_subjects_mesh.downloader import MeSHDownloader
 from invenio_subjects_mesh.reader import MeSHReader
 from invenio_subjects_mesh.writer import write_yaml
 
 
 @pytest.fixture(scope="module")
 def src_filepath():
-    return Path(__file__).parent / "descriptors_test_file.bin"
+    return Path(__file__).parent / "data" / "fake_d2022.bin"
+
+
+@contextmanager
+def fake_request_context(url, stream):
+    fp = ""
+    base_url = (
+        "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/asciimesh/"
+    )
+    if url == base_url + "d2022.bin":
+        fp = Path(__file__).parent / "data/fake_d2022.bin"
+    elif url == base_url + "q2022.bin":
+        fp = Path(__file__).parent / "data/fake_q2022.bin"
+    else:
+        raise Exception("Update the test!")
+
+    FakeRequestContext = namedtuple("FakeRequestContext", ["raw"])
+
+    with open(fp, "rb") as f:
+        yield FakeRequestContext(raw=f)
+
+
+@mock.patch('invenio_subjects_mesh.downloader.requests.get')
+def test_downloader(patched_get):
+    # patch requests.get to return files
+    patched_get.side_effect = fake_request_context
+    downloads_dir = Path(__file__).parent / "downloads"
+    files = MeSHDownloader(directory=downloads_dir)
+
+    files.download()
+
+    patched_get.assert_called()
+    assert downloads_dir / "d2022.bin" == files.topics_filepath
+    assert downloads_dir / "q2022.bin" == files.qualifiers_filepath
 
 
 def test_reader(src_filepath):
