@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2021 Northwestern University.
+# Copyright (C) 2021-2022 Northwestern University.
 #
 # invenio-subjects-mesh is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -12,9 +12,12 @@
 class MeSHConverter:
     """Convert MeSH term into subject dict for YAML writing."""
 
-    def __init__(self, reader):
+    def __init__(self, topics_reader, qualifiers_reader):
         """Constructor."""
-        self._reader = reader
+        self._topics_reader = topics_reader
+        self._qualifier_map = {
+            q.get("QA"): q for q in qualifiers_reader
+        }
 
     def generate_id(self, identifier):
         """Generate URI id."""
@@ -22,9 +25,21 @@ class MeSHConverter:
 
     def __iter__(self):
         """Iterate over converted entries."""
-        for term in self._reader:
+        for term in self._topics_reader:
             yield {
                 "id": self.generate_id(term['UI']),
                 "scheme": "MeSH",
                 "subject": term['MH']
             }
+
+            for qid in term.get("AQ", []):
+                qualifier = self._qualifier_map.get(qid)
+
+                if not qualifier:
+                    continue
+
+                yield {
+                    "id": self.generate_id(term['UI'] + qualifier['UI']),
+                    "scheme": "MeSH",
+                    "subject": term['MH'] + "/" + qualifier['SH']
+                }

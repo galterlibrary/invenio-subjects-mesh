@@ -127,20 +127,43 @@ def test_qualifiers_reader():
 
 def test_converter():
     mesh_topics = [{
-        'MH': 'Filariasis',
+        'MH': 'Seed Bank',
         'DC': '1',
-        'UI': 'D005368'
+        'AQ': ['CL', 'EC'],
+        'UI': 'D000068098'
     }]
-    converter = MeSHConverter(mesh_topics)
+    mesh_qualifiers = [
+        {
+            "QA": "CL",
+            "SH": "classification",
+            "UI": "Q000145"
+        },
+        {
+            "QA": "EC",
+            "SH": "economics",
+            "UI": "Q000191"
+        },
+    ]
+    converter = MeSHConverter(mesh_topics, mesh_qualifiers)
 
     objects = [o for o in converter]
 
     assert objects == [
         {
-            "id": 'https://id.nlm.nih.gov/mesh/D005368',
+            "id": 'https://id.nlm.nih.gov/mesh/D000068098',
             "scheme": "MeSH",
-            "subject": "Filariasis"
-        }
+            "subject": "Seed Bank"
+        },
+        {
+            "id": 'https://id.nlm.nih.gov/mesh/D000068098Q000145',
+            "scheme": "MeSH",
+            "subject": "Seed Bank/classification"
+        },
+        {
+            "id": 'https://id.nlm.nih.gov/mesh/D000068098Q000191',
+            "scheme": "MeSH",
+            "subject": "Seed Bank/economics"
+        },
     ]
 
 

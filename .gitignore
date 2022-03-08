@@ -14,7 +14,7 @@ env/
 build/
 develop-eggs/
 dist/
-downloads/
+downloads/*
 eggs/
 .eggs/
 lib/
@@ -62,5 +62,8 @@ target/
 .*.sw?
 .vscode/
 
-# Non yaml data
-invenio_subjects_mesh/download/data/d2021.bin
+# Only keep the downloads folder
+invenio_subjects_mesh/downloads/*
+!invenio_subjects_mesh/downloads/.gitkeep
+tests/downloads/*
+!tests/downloads/.gitkeep
