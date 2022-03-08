@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2021-2022 Northwestern University.
+#
+# invenio-subjects-mesh is free software; you can redistribute it and/or
+# modify it under the terms of the MIT License; see LICENSE file for more
+# details.
+
 """Test MeSH extractor."""
 
 from collections import namedtuple
@@ -5,18 +13,14 @@ from contextlib import contextmanager
 from pathlib import Path
 from unittest import mock
 
-import pytest
 import yaml
 
 from invenio_subjects_mesh.converter import MeSHConverter
 from invenio_subjects_mesh.downloader import MeSHDownloader
-from invenio_subjects_mesh.reader import MeSHReader
+from invenio_subjects_mesh.reader import MeSHReader, topic_filter
 from invenio_subjects_mesh.writer import write_yaml
 
-
-@pytest.fixture(scope="module")
-def src_filepath():
-    return Path(__file__).parent / "data" / "fake_d2022.bin"
+# Helpers
 
 
 @contextmanager
@@ -38,6 +42,16 @@ def fake_request_context(url, stream):
         yield FakeRequestContext(raw=f)
 
 
+def assert_includes(dicts, dict_cores):
+    """Checks that each dict in dicts has the corresponding dict_core."""
+    for d, dc in zip(dicts, dict_cores):
+        for key, value in dc.items():
+            assert value == d[key]
+
+
+# Tests
+
+
 @mock.patch('invenio_subjects_mesh.downloader.requests.get')
 def test_downloader(patched_get):
     # patch requests.get to return files
@@ -52,41 +66,18 @@ def test_downloader(patched_get):
     assert downloads_dir / "q2022.bin" == files.qualifiers_filepath
 
 
-def test_reader(src_filepath):
-    reader = MeSHReader(src_filepath, filter='topics')
+def test_topics_reader():
+    filepath = Path(__file__).parent / "data" / "fake_d2022.bin"
+    reader = MeSHReader(filepath, filter=topic_filter)
 
     topics = [t for t in reader]
 
-    assert topics == [
-        {
-            'MH': 'Abnormalities, Multiple',
-            'DC': '1',
-            'UI': 'D000015'
-        },
+    expected_cores = [
         {
             'MH': 'Seed Bank',
             'DC': '1',
+            'AQ': ['CL', 'EC'],
             'UI': 'D000068098'
-        },
-        {
-            'MH': 'Filariasis',
-            'DC': '1',
-            'UI': 'D005368'
-        },
-        {
-            'MH': 'Congenital Abnormalities',
-            'DC': '1',
-            'UI': 'D000013'
-        },
-        {
-            'MH': 'Abdominal Injuries',
-            'DC': '1',
-            'UI': 'D000007'
-        },
-        {
-            'MH': 'Abdominal Neoplasms',
-            'DC': '1',
-            'UI': 'D000008'
         },
         {
             'MH': 'Abbreviations as Topic',
@@ -96,9 +87,42 @@ def test_reader(src_filepath):
         {
             'MH': 'Abdomen',
             'DC': '1',
+            'AQ': ['AB', 'AH'],
             'UI': 'D000005'
         }
     ]
+    assert_includes(topics, expected_cores)
+
+
+def test_qualifiers_reader():
+    filepath = Path(__file__).parent / "data" / "fake_q2022.bin"
+    reader = MeSHReader(filepath)
+
+    qualifiers = [t for t in reader]
+
+    expected_cores = [
+        {
+            "QA": "AB",
+            "SH": "abnormalities",
+            "UI": "Q000002"
+        },
+        {
+            "QA": "AH",
+            "SH": "anatomy & histology",
+            "UI": "Q000033"
+        },
+        {
+            "QA": "CL",
+            "SH": "classification",
+            "UI": "Q000145"
+        },
+        {
+            "QA": "EC",
+            "SH": "economics",
+            "UI": "Q000191"
+        },
+    ]
+    assert_includes(qualifiers, expected_cores)
 
 
 def test_converter():
