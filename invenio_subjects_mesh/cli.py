@@ -13,19 +13,22 @@ from pathlib import Path
 import click
 
 from .converter import MeSHConverter
-from .download import download_mesh
-from .reader import MeSHReader
+from .downloader import MeSHDownloader
+from .reader import MeSHReader, topic_filter
 from .writer import write_yaml
 
 
 @click.command()
 def main():
     """Generate new subjects_mesh.yaml file."""
-    filepath = download_mesh()
+    downloads_dir = Path(__file__).parent / "downloads"
+    files = MeSHDownloader(downloads_dir)
+    files.download()
 
-    reader = MeSHReader(filepath, filter='topics')
+    topics_reader = MeSHReader(files.topics_filepath, filter=topic_filter)
+    qualifiers_reader = MeSHReader(files.qualifiers_filepath)
 
-    converter = MeSHConverter(reader)
+    converter = MeSHConverter(topics_reader, qualifiers_reader)
 
     filepath = write_yaml(converter)
 
