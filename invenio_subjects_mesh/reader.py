@@ -1,63 +1,51 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2021-2022 Northwestern University.
+#
+# invenio-subjects-mesh is free software; you can redistribute it and/or
+# modify it under the terms of the MIT License; see LICENSE file for more
+# details.
+
 """MeSH term loader."""
-import re
-
-
-class RetainedMatch:
-    """Retained Match. More convenient API around matching."""
-
-    _prev_match = None  # act as short lived memento pattern
-
-    @classmethod
-    def match(cls, pattern, text):
-        """Return re.match but save result until next `match` call."""
-        cls._prev_match = re.match(pattern, text)
-        return cls._prev_match
-
-    @classmethod
-    def group(cls, index):
-        """Return matched group from saved match."""
-        return cls._prev_match.group(index) if cls._prev_match else None
 
 
 class MeSH:
     """MeSH term extractor."""
 
-    filter_to_dc = {
-        'all': r'\d',
-        'topics': '1',
-        'types': '2',
-        'check_tags': '3',
-        'geographics': '4'
-    }
-
     @classmethod
-    def _pattern(cls, key):
-        return r'{} = (.+)'.format(key)
-
-    @classmethod
-    def load(cls, filepath, filter='all'):
-        """Return array of MeSH dict."""
+    def load(cls, filepath, filter=lambda r: True):
+        """Iterate over selected MeSH terms."""
         with open(filepath, 'r') as f:
-            term = {}
+            record = {}
 
             for line in f.readlines():
-                if RetainedMatch.match(MeSH._pattern('MH'), line):
-                    term['MH'] = RetainedMatch.group(1).strip()
-                elif RetainedMatch.match(MeSH._pattern('DC'), line):
-                    term['DC'] = RetainedMatch.group(1).strip()
-                elif RetainedMatch.match(MeSH._pattern('UI'), line):
-                    term['UI'] = RetainedMatch.group(1).strip()
+                if "=" not in line:
+                    continue
 
-                    if re.match(term['DC'], MeSH.filter_to_dc[filter]):
-                        yield term
+                key, value = [p.strip() for p in line.split("=", maxsplit=1)]
+                cls.update_record(record, key, value)
 
-                    term = {}
+                if key == "UI":
+                    if filter(record):
+                        yield record
+                    record = {}
+
+    @classmethod
+    def update_record(cls, record, key, value):
+        """Update the value of a key in the MeSH record.
+
+        We deal with special cases of interest here.
+        """
+        if key == "AQ":
+            record[key] = [q.strip() for q in value.split()]
+        else:
+            record[key] = value
 
 
 class MeSHReader:
     """MeSH Reader."""
 
-    def __init__(self, filepath, filter='all'):
+    def __init__(self, filepath, filter=lambda r: True):
         """Constructor."""
         self._filepath = filepath
         self._filter = filter
@@ -65,3 +53,8 @@ class MeSHReader:
     def __iter__(self):
         """Iterate over terms."""
         yield from MeSH.load(self._filepath, self._filter)
+
+
+def topic_filter(record):
+    """Filters for topical terms."""
+    return record.get("DC") == "1"
