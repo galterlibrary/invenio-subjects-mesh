@@ -15,7 +15,7 @@ import click
 from .converter import MeSHConverter
 from .downloader import MeSHDownloader
 from .reader import MeSHReader, topic_filter
-from .writer import write_yaml
+from .writer import write_jsonl
 
 
 @click.command()
@@ -30,6 +30,6 @@ def main():
 
     converter = MeSHConverter(topics_reader, qualifiers_reader)
 
-    filepath = write_yaml(converter)
+    filepath = write_jsonl(converter)
 
     print(f"MeSH terms written here {filepath}")

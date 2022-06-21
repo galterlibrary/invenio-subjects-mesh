@@ -27,6 +27,7 @@ for arg in $@; do
 done
 
 
+# Note: check_manifest is still incredibly slow! (w/ 12.86s and w/o 1.51s)
 python -m check_manifest --no-build-isolation
 # Note: expansion of pytest_args looks like below to not cause an unbound
 # variable error when 1) "nounset" and 2) the array is empty.

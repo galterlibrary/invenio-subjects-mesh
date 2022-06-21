@@ -8,6 +8,8 @@
 
 """MeSH term loader."""
 
+import json
+
 
 class MeSH:
     """MeSH term extractor."""
@@ -58,3 +60,10 @@ class MeSHReader:
 def topic_filter(record):
     """Filters for topical terms."""
     return record.get("DC") == "1"
+
+
+def read_jsonl(filepath):
+    """KISS jsonl file reader."""
+    with open(filepath) as f:
+        for line in f:
+            yield json.loads(line)
