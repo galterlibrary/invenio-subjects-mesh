@@ -17,8 +17,8 @@ import yaml
 
 from invenio_subjects_mesh.converter import MeSHConverter
 from invenio_subjects_mesh.downloader import MeSHDownloader
-from invenio_subjects_mesh.reader import MeSHReader, topic_filter
-from invenio_subjects_mesh.writer import write_yaml
+from invenio_subjects_mesh.reader import MeSHReader, read_jsonl, topic_filter
+from invenio_subjects_mesh.writer import write_jsonl
 
 # Helpers
 
@@ -193,10 +193,9 @@ def test_write():
         }
     ]
 
-    write_yaml(entries, filepath)
+    write_jsonl(entries, filepath)
 
-    with open(filepath) as f:
-        read_entries = yaml.safe_load(f)
+    read_entries = list(read_jsonl(filepath))
     assert entries == read_entries
 
     try:
