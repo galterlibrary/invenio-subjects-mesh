@@ -9,4 +9,4 @@
 """MeSH subject terms for InvenioRDM."""
 
 
-__version__ = '2022.06.21'
+__version__ = '2023.01.01'
