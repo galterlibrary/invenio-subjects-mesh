@@ -46,7 +46,7 @@ When a new list of MeSH term comes out, this package should be updated. Here we 
    3- Convert terms to InvenioRDM subjects format
    4- Write those to `invenio_subjects_mesh/vocabularies/subjects_mesh.jsonl` file
 
-2- When you are happy with the list, bump the version in `invenio_subjects_mesh/version.py` and release it.
+2- When you are happy with the list, bump the version in `invenio_subjects_mesh/__init__.py` and release it.
 
 **Note**
 
