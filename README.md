@@ -2,7 +2,7 @@
 
 MeSH subject terms for InvenioRDM
 
-Install this extension to get Medical Subject Headings topics into your instance. Functionality is given for other headings too.
+Install this extension to get Medical Subject Headings topics into your instance.
 
 ## Installation
 
@@ -25,7 +25,7 @@ There are 2 types of users for this package. Maintainers of the package and inst
 
 ### Instance administrators
 
-For instance administrators, after you have installed the extension as per the steps above, you are done. It should just work.
+For instance administrators, after you have installed the extension as per the steps above, you will want to reload your instance's fixtures: `pipenv run invenio rdm-records fixtures` . Updating existing terms currently requires manual replacement.
 
 ### Maintainers
 
@@ -44,7 +44,7 @@ When a new list of MeSH term comes out, this package should be updated. Here we 
    1- Download the new list (TODO - For now download it manually and place it in `invenio_subjects_mesh/download/data/`)
    2- Read it filtering for topics
    3- Convert terms to InvenioRDM subjects format
-   4- Write those to `invenio_subjects_mesh/vocabularies/subjects_mesh.yaml` file
+   4- Write those to `invenio_subjects_mesh/vocabularies/subjects_mesh.jsonl` file
 
 2- When you are happy with the list, bump the version in `invenio_subjects_mesh/version.py` and release it.
 

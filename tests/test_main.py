@@ -13,8 +13,6 @@ from contextlib import contextmanager
 from pathlib import Path
 from unittest import mock
 
-import yaml
-
 from invenio_subjects_mesh.converter import MeSHConverter
 from invenio_subjects_mesh.downloader import MeSHDownloader
 from invenio_subjects_mesh.reader import MeSHReader, read_jsonl, topic_filter
@@ -58,11 +56,12 @@ def test_downloader(patched_get):
     patched_get.side_effect = fake_request_context
     downloads_dir = Path(__file__).parent / "downloads"
     files = MeSHDownloader(directory=downloads_dir)
+    year = "2022"
 
-    files.download()
+    files.download(year)
 
     patched_get.assert_called()
-    assert downloads_dir / "d2022.bin" == files.topics_filepath
+    assert downloads_dir / "d2022.bin" == files.descriptors_filepath
     assert downloads_dir / "q2022.bin" == files.qualifiers_filepath
 
 
@@ -168,7 +167,7 @@ def test_converter():
 
 
 def test_write():
-    filepath = Path(__file__).parent / "test_subjects.yaml"
+    filepath = Path(__file__).parent / "test_subjects.jsonl"
     entries = [
         {
             "id": 'D000015',

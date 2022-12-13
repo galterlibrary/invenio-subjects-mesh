@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2021 Northwestern University.
+# Copyright (C) 2021-2022 Northwestern University.
 #
 # invenio-subjects-mesh is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -19,13 +19,16 @@ from .writer import write_jsonl
 
 
 @click.command()
-def main():
-    """Generate new subjects_mesh.yaml file."""
+@click.argument("year")
+def main(**parameters):
+    """Generate new subjects_mesh.jsonl file."""
+    year = parameters["year"]
+
     downloads_dir = Path(__file__).parent / "downloads"
     files = MeSHDownloader(downloads_dir)
-    files.download()
+    files.download(year)
 
-    topics_reader = MeSHReader(files.topics_filepath, filter=topic_filter)
+    topics_reader = MeSHReader(files.descriptors_filepath, filter=topic_filter)
     qualifiers_reader = MeSHReader(files.qualifiers_filepath)
 
     converter = MeSHConverter(topics_reader, qualifiers_reader)
