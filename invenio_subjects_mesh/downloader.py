@@ -19,17 +19,22 @@ class MeSHDownloader:
     def __init__(self, directory):
         """Constructor."""
         self.directory = directory
-        self.topics_filepath = ""
-        self.qaulifiers_filepath = ""
+        self.descriptors_filepath = ""
+        self.qualifiers_filepath = ""
         self.base_url = "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/asciimesh/"  # noqa
 
-    def download(self):
-        """Download MeSH files of interest."""
-        # topics
-        self.topics_filepath = self.download_file(self.base_url + "d2022.bin")
+    def download(self, year):
+        """Download MeSH files of interest.
+
+        :param year: str. year of the files to download.
+        """
+        # descriptors
+        self.descriptors_filepath = self.download_file(
+            self.base_url + f"d{year}.bin"
+        )
         # qualifiers
         self.qualifiers_filepath = self.download_file(
-            self.base_url + "q2022.bin"
+            self.base_url + f"q{year}.bin"
         )
 
     def download_file(self, url):

@@ -10,7 +10,7 @@
 
 
 class MeSHConverter:
-    """Convert MeSH term into subject dict for YAML writing."""
+    """Convert MeSH term into subject dict."""
 
     def __init__(self, topics_reader, qualifiers_reader):
         """Constructor."""
