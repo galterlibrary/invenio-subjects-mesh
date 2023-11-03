@@ -1,3 +1,71 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta:__legacy__"
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+    {name = "Northwestern University", email = "DL_FSM_GDS@e.northwestern.edu"}
+]
+classifiers = [
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
+]
+dependencies = []
+description = "MeSH subject terms with qualifiers"
+dynamic = ["version"]
+keywords = ["invenio", "inveniordm", "subjects", "MeSH"]
+license = {file = "LICENSE"}
+name = "invenio-subjects-mesh"
+readme = "README.md"
+requires-python = ">=3.8"
+urls = {Repository = "https://github.com/galterlibrary/invenio-subjects-mesh"}
+
+[project.optional-dependencies]
+dev = [
+    "check-manifest>=0.49",
+    "invoke>=2.2,<3.0",
+    "galter-subjects-utils>=0.1.0,<2.0",
+    "pyyaml>=5.4.1",
+    "pytest>=7.2.0",
+    "pytest-cov>=3.0.0",
+    "pytest-isort>=3.0.0",
+    "pytest-pycodestyle>=2.2.0",
+    "pytest-pydocstyle>=2.2.3"
+]
+
+[project.entry-points."invenio_rdm_records.fixtures"]
+invenio_subjects_mesh = "invenio_subjects_mesh.vocabularies"
+
+[tool.setuptools]
+packages = ["invenio_subjects_mesh", "invenio_subjects_mesh.vocabularies"]
+
+[tool.setuptools.dynamic]
+version = {attr = "invenio_subjects_mesh.__version__"}
+
+[tool.check-manifest]
+ignore = [
+    ".*-requirements.txt",
+    "*.bin",
+    "*.gitkeep",
+    ".venv/",
+    ".editorconfig",
+    ".github/"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = '--isort --pydocstyle --pycodestyle --doctest-glob="*.rst" --doctest-modules --cov=invenio_subjects_mesh --cov-report=term-missing'
+testpaths = ["tests", "invenio_subjects_mesh"]
+
+[tool.pydocstyle]
+add_ignore = ["D401"]
