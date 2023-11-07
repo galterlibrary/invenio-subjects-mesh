@@ -59,7 +59,8 @@ ignore = [
     "*.gitkeep",
     ".venv/",
     ".editorconfig",
-    ".github/"
+    ".github/",
+    "tasks.py"
 ]
 
 [tool.pytest.ini_options]

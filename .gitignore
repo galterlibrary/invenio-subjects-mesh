@@ -25,6 +25,9 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+Pipfile
+Pipfile.lock
+.venv/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -45,6 +48,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+.pytest_cache
 
 # Translations
 *.mo
@@ -61,9 +65,3 @@ target/
 # Editors
 .*.sw?
 .vscode/
-
-# Only keep the downloads folder
-invenio_subjects_mesh/downloads/*
-!invenio_subjects_mesh/downloads/.gitkeep
-tests/downloads/*
-!tests/downloads/.gitkeep
