@@ -11,20 +11,8 @@
 #
 #  check-manifest -u
 
-include .dockerignore
-include .editorconfig
-recursive-include .github/workflows *.yml
-
 # added by check-manifest
-include *.rst
 include *.md
-include *.sh
-include *.txt
-include babel.ini
-include pytest.ini
-recursive-include invenio_subjects_mesh *.html
 recursive-include invenio_subjects_mesh *.yaml
 recursive-include invenio_subjects_mesh *.jsonl
-recursive-include invenio_subjects_mesh *.gitkeep
 recursive-include tests *.py
-recursive-include tests *.gitkeep
