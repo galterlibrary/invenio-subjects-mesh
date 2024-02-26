@@ -41,38 +41,34 @@ There are 2 types of users for this package. Instance administrators and package
 
 For instance administrators, after you have installed the extension as per the steps above, you will want to reload your instance's fixtures: `pipenv run invenio rdm-records fixtures`. This will install the new terms in your instance.
 
-Updating existing terms currently requires manual replacement.
+Alternatively, or if you want to update your already loaded subjects to a new listing (e.g. from one year's list to another), you can update your instance's MeSH subjects as per below. Updating subjects this way takes care of everything for you: the subjects themselves and the records/drafts using those subjects. **WARNING** This operation can _remove_ subjects.
+
+```bash
+# In your instance's project
+# Download up-to-date listings
+pipenv run invenio galter_subjects mesh download -d /path/to/downloads/storage/ -y YEAR
+# Generate file containg deltas to transition your instance to the downloaded listing
+pipenv run invenio galter_subjects mesh deltas -d /path/to/downloads/storage/ -y YEAR -f topic-qualifier -o deltas_mesh.csv
+# Update your instance - *this operation will modify your instance*
+pipenv run invenio galter_subjects update deltas_mesh.csv
+```
+
+Look at the help text for these commands to see additional options that can be passed.
+In particular, options for `galter_subjects update` allow you to store renamed, replaced or removed subjects on records according to a template of your choice.
 
 ### Maintainers
 
 When a new list of MeSH term comes out, this package should be updated. Here we show how.
 
-0. Install this package locally with the `dev` extra:
-
 ```bash
-pipenv run pip install -e .[dev]
+# In this project
+# Download up-to-date listings
+pipenv run invenio galter_subjects mesh download -d /path/to/downloads/storage/ -y YEAR
+# Generate file containing initial listing
+pipenv run invenio galter_subjects mesh file -d /path/to/downloads/storage/ -y YEAR -f topic-qualifier -o invenio_subjects_mesh/vocabularies/subjects_mesh.csv
 ```
 
-1. Use the installed `galter-subjects-utils` tool to get the new list:
-
-```bash
-pipenv run galter-subjects-utils mesh --filter topic-qualifier --output-file invenio_subjects_mesh/vocabularies/subjects_mesh.jsonl
-```
-
-   This will
-
-   1. Download the new list(s)
-   2. Read it filtering for topics
-   3. Convert terms to InvenioRDM subjects format
-   4. Write those to the specified file
-
-2. Check the manifest (it should typically be all good)
-
-```bash
-pipenv run inv check-manifest
-```
-
-3. When you are happy with the list, bump the version and release it.
+When you are happy with the list, bump the version in `pyproject.toml` and release it.
 
 ## Development
 
