@@ -2,6 +2,6 @@ subjects:
   pid-type: sub
   schemes:
     - id: MeSH
-      data-file: subjects_mesh.jsonl
+      data-file: subjects_mesh.csv
       name: Medical Subject Headings
       uri: "https://www.nlm.nih.gov/mesh/meshhome.html"
