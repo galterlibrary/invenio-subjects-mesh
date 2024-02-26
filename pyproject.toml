@@ -18,9 +18,10 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11"
 ]
-dependencies = []
+dependencies = [
+    "galter-subjects-utils>=0.3.1,<2.0",
+]
 description = "MeSH subject terms with qualifiers"
 dynamic = ["version"]
 keywords = ["invenio", "inveniordm", "subjects", "MeSH"]
@@ -34,13 +35,8 @@ urls = {Repository = "https://github.com/galterlibrary/invenio-subjects-mesh"}
 dev = [
     "check-manifest>=0.49",
     "invoke>=2.2,<3.0",
-    "galter-subjects-utils>=0.1.0,<2.0",
     "pyyaml>=5.4.1",
-    "pytest>=7.2.0",
-    "pytest-cov>=3.0.0",
-    "pytest-isort>=3.0.0",
-    "pytest-pycodestyle>=2.2.0",
-    "pytest-pydocstyle>=2.2.3"
+    "pytest-invenio>=2.1.1,<3.0.0",
 ]
 
 [project.entry-points."invenio_rdm_records.fixtures"]

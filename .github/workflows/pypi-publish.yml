@@ -1,7 +1,12 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2023-2024 Northwestern University.
+#
+
 on:
   push:
     tags:
-      - v*
+      - 'v*!rc*'
 
 jobs:
   build-n-publish:
@@ -13,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |

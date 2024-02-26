@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2021 Northwestern University.
+# Copyright (C) 2021-2024 Northwestern University.
 #
 # invenio-subjects-mesh is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -15,4 +15,5 @@
 include *.md
 recursive-include invenio_subjects_mesh *.yaml
 recursive-include invenio_subjects_mesh *.jsonl
+recursive-include invenio_subjects_mesh *.csv
 recursive-include tests *.py
