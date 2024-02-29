@@ -20,7 +20,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 dependencies = [
-    "galter-subjects-utils>=0.3.1,<2.0",
+    "galter-subjects-utils>=0.3.2,<2.0",
 ]
 description = "MeSH subject terms with qualifiers"
 dynamic = ["version"]
