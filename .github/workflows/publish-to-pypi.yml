@@ -6,7 +6,7 @@
 on:
   push:
     tags:
-      - 'v*!rc*'
+      - v*
 
 jobs:
   build-n-publish:
