@@ -25,6 +25,8 @@ def test_version():
 def test_vocabularies_yaml():
     """Test vocabularies.yaml structure."""
     extensions = [
+        # As opposed to invenio-subjects-mesh-lite, we test against
+        # non-deprecated way to load entry points for future-proofing
         ep.load() for ep in
         importlib_metadata.entry_points(group="invenio_rdm_records.fixtures")
     ]
