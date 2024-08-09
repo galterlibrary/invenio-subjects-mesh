@@ -1,5 +1,9 @@
 # Changes
 
+Version 2024.3.5 (released 2024-08-09)
+
+- make compatible with InvenioRDM v12
+
 Version 2024.3.4 (released 2024-05-22)
 
 - patch fix from galter-subjects-utils
