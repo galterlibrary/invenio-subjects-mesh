@@ -15,9 +15,9 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
     "galter-subjects-utils>=0.4.2,<2.0",
@@ -28,12 +28,13 @@ keywords = ["invenio", "inveniordm", "subjects", "MeSH"]
 license = {file = "LICENSE"}
 name = "invenio-subjects-mesh"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 urls = {Repository = "https://github.com/galterlibrary/invenio-subjects-mesh"}
 
 [project.optional-dependencies]
 dev = [
     "check-manifest>=0.49",
+    "invenio-search[opensearch2]>=2.1.0,<3.0",  # Needs to be specified separately as it's normally up to the instance
     "invoke>=2.2,<3.0",
     "pyyaml>=5.4.1",
     "pytest-invenio>=2.1.1,<3.0.0",
@@ -61,6 +62,7 @@ ignore = [
 
 [tool.pytest.ini_options]
 minversion = "6.0"
+# ATTN: Remove the cov options when using breakpoint() since it interferes
 addopts = '--isort --pydocstyle --pycodestyle --doctest-glob="*.rst" --doctest-modules --cov=invenio_subjects_mesh --cov-report=term-missing'
 testpaths = ["tests", "invenio_subjects_mesh"]
 
