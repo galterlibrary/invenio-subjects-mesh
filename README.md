@@ -37,9 +37,9 @@ table will be provided to indicate which version is compatible with with Invenio
 
 There are 2 types of users for this package. Instance administrators and package maintainers.
 
-### Instance administrators
+### Instance operators
 
-For instance administrators, after you have installed the extension as per the steps above, you will want to reload your instance's fixtures: `pipenv run invenio rdm-records fixtures`. This will install the new terms in your instance.
+For instance operators, after you have installed the extension as per the steps above, you will want to reload your instance's fixtures: `pipenv run invenio rdm-records fixtures`. This will install the new terms in your instance.
 
 Alternatively, or if you want to update your already loaded subjects to a new listing (e.g. from one year's list to another), you can update your instance's MeSH subjects as per below. Updating subjects this way takes care of everything for you: the subjects themselves and the records/drafts using those subjects. **WARNING** This operation can _remove_ subjects.
 
@@ -60,12 +60,20 @@ In particular, options for `galter_subjects update` allow you to store renamed, 
 
 When a new list of MeSH term comes out, this package should be updated. Here we show how.
 
+**Pre-requisite/Context**
+
+[Install the distribution package for development](#development) before you do anything.
+
+**Commands**
+
+Once you have it installed, you can run the following commands in the isolated virtualenv:
+
 ```bash
 # In this project
 # Download up-to-date listings
-pipenv run invenio galter_subjects mesh download -d /path/to/downloads/storage/ -y YEAR
+(venv) invenio galter_subjects mesh download -d /path/to/downloads/storage/ -y YEAR
 # Generate file containing initial listing
-pipenv run invenio galter_subjects mesh file -d /path/to/downloads/storage/ -y YEAR -f topic-qualifier -o invenio_subjects_mesh/vocabularies/subjects_mesh.csv
+(venv) invenio galter_subjects mesh file -d /path/to/downloads/storage/ -y YEAR -f topic-qualifier -o invenio_subjects_mesh/vocabularies/subjects_mesh.csv
 ```
 
 When you are happy with the list, bump the version in `pyproject.toml` and release it.
