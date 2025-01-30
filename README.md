@@ -2,6 +2,9 @@
 
 *MeSH topical subject terms with qualifiers for InvenioRDM*
 
+<a href="https://pypi.org/project/invenio-subjects-mesh/">
+  <img src="https://img.shields.io/pypi/v/invenio-subjects-mesh.svg">
+</a>
 Install this extension to get Medical Subject Headings topics with qualifiers into your instance.
 
 If you are looking for a smaller MeSH vocabulary without the qualifiers, use
