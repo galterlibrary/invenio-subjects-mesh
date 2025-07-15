@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2021-2024 Northwestern University.
+# Copyright (C) 2021-2025 Northwestern University.
 #
 # invenio-subjects-mesh is free software; you can redistribute it and/or
 # modify it under the terms of the MIT License; see LICENSE file for more
@@ -18,8 +18,6 @@ import yaml
 def test_vocabularies_yaml():
     """Test vocabularies.yaml structure."""
     extensions = [
-        # As opposed to invenio-subjects-mesh-lite, we test against
-        # non-deprecated way to load entry points for future-proofing
         ep.load() for ep in
         importlib_metadata.entry_points(group="invenio_rdm_records.fixtures")
     ]

@@ -7,6 +7,3 @@
 # details.
 
 """MeSH subject terms for InvenioRDM."""
-
-
-__version__ = '2025.1.15'

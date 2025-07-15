@@ -24,13 +24,13 @@ dependencies = [
     "galter-subjects-utils>=0.7.0,<2.0",
 ]
 description = "MeSH subject terms with qualifiers"
-dynamic = ["version"]
 keywords = ["invenio", "inveniordm", "subjects", "MeSH"]
 license = {file = "LICENSE"}
 name = "invenio-subjects-mesh"
 readme = "README.md"
 requires-python = ">=3.9"
 urls = {Repository = "https://github.com/galterlibrary/invenio-subjects-mesh"}
+version = "2025.1.15.2"
 
 [project.optional-dependencies]
 dev = [
@@ -66,9 +66,6 @@ conflicts = [
       { extra = "dev_pre" },
     ],
 ]
-
-[tool.setuptools.dynamic]
-version = {attr = "invenio_subjects_mesh.__version__"}
 
 [tool.check-manifest]
 ignore = [
