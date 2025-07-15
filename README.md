@@ -43,7 +43,7 @@ This follows [calendar versioning](https://calver.org/) (for year, month, and da
 | 2025-06-31                | 2            | 2025.6.31.2             |
 | 2025-12-01                | 0            | 2025.12.1.0             |
 
-**Prior to 2025.6.4.1**
+**Prior to 2025.1.15.2**
 
 This repository follows [calendar versioning](https://calver.org/) for year and month. It does a "best effort" attempt at tracking the MeSH updates in an *up-to-and-including* version date manner. The following are illustrative cases of how to understand the versioning of this distribution package:
 

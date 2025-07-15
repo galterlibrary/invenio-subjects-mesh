@@ -1,5 +1,10 @@
 # Changes
 
+Version 2025.1.15.2 (released 2025-07-15)
+
+- Compatible with InvenioRDM v13
+- Switch versioning pattern
+
 Version 2025.1.15 (released 2025-01-15)
 
 - MeSH 2025
