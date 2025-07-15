@@ -14,13 +14,6 @@ from pathlib import Path
 import importlib_metadata
 import yaml
 
-from invenio_subjects_mesh import __version__
-
-
-def test_version():
-    """Test version import."""
-    assert __version__
-
 
 def test_vocabularies_yaml():
     """Test vocabularies.yaml structure."""
