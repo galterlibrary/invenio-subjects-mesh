@@ -9,7 +9,6 @@ authors = [
 classifiers = [
     "Environment :: Web Environment",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
@@ -19,13 +18,14 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "galter-subjects-utils>=0.7.0,<2.0",
 ]
 description = "MeSH subject terms with qualifiers"
 keywords = ["invenio", "inveniordm", "subjects", "MeSH"]
-license = {file = "LICENSE"}
+license = "MIT"
 name = "invenio-subjects-mesh"
 readme = "README.md"
 requires-python = ">=3.9"

@@ -14,6 +14,5 @@
 # added by check-manifest
 include *.md
 recursive-include invenio_subjects_mesh *.yaml
-recursive-include invenio_subjects_mesh *.jsonl
 recursive-include invenio_subjects_mesh *.csv
 recursive-include tests *.py
