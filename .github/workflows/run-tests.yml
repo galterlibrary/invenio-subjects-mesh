@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2023-2024 Northwestern University.
+# Copyright (C) 2023-2025 Northwestern University.
 #
 
 on:
@@ -18,35 +18,5 @@ on:
         default: 'Manual trigger'
 
 jobs:
-  Tests:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-          python-version: ["3.9", "3.11", "3.12", "3.13"]
-          requirements-level: [pypi]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip setuptools wheel build
-
-      - name: Install dependencies
-        run: |
-          pip install .[dev]
-          pip freeze
-
-      - name: Check manifest
-        run: |
-          invoke check-manifest
-
-      - name: Run tests
-        run: |
-          invoke test --no-color
+  tests:
+    uses: galterlibrary/reusable-workflows/.github/workflows/inveniordm-tests-python.yml@main
