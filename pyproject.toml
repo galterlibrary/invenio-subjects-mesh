@@ -14,23 +14,22 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-    "galter-subjects-utils>=0.7.0,<2.0",
+    "invenio-subjects-mesh-common>=0.2.0,<2.0",
 ]
 description = "MeSH subject terms with qualifiers"
 keywords = ["invenio", "inveniordm", "subjects", "MeSH"]
 license = "MIT"
 name = "invenio-subjects-mesh"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 urls = {Repository = "https://github.com/galterlibrary/invenio-subjects-mesh"}
-version = "2025.1.15.2"
+version = "2026.1.27.0"
 
 [project.optional-dependencies]
 dev = [
@@ -39,19 +38,41 @@ dev = [
     "invoke>=2.2,<3.0",
     "pyyaml>=5.4.1",
     "pytest-invenio>=3.3.0,<5.0.0",
+    # pytest-invenio includes pytest & co and docker-services-cli
 ]
 
 dev_pre = [
     "check-manifest>=0.49",
-    "invenio-search[opensearch2]>=3.0.0,<4.0.0",  # Needs to be specified separately as it's up to instance
+    "invenio-search[opensearch2]>=3.0.0,<4.0.0",
     "invoke>=2.2,<3.0",
     "pyyaml>=5.4.1",
     "pytest-invenio>=3.3.0,<5.0.0",
-    # pytest-invenio includes pytest & co and docker-services-cli
 ]
 
 [project.entry-points."invenio_rdm_records.fixtures"]
 invenio_subjects_mesh = "invenio_subjects_mesh.vocabularies"
+
+# Tools
+
+[tool.check-manifest]
+ignore = [
+    ".*-requirements.txt",
+    "*.bin",
+    "*.gitkeep",
+    ".venv/",
+    ".editorconfig",
+    ".github/",
+    "tasks.py"
+]
+
+[tool.pydocstyle]
+add_ignore = ["D401"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+# ATTN: Remove the cov options when using breakpoint() since it interferes
+addopts = '--isort --pydocstyle --pycodestyle --doctest-glob="*.rst" --doctest-modules --cov=invenio_subjects_mesh --cov-report=term-missing'
+testpaths = ["tests", "invenio_subjects_mesh"]
 
 [tool.setuptools]
 packages = ["invenio_subjects_mesh", "invenio_subjects_mesh.vocabularies"]
@@ -66,23 +87,3 @@ conflicts = [
       { extra = "dev_pre" },
     ],
 ]
-
-[tool.check-manifest]
-ignore = [
-    ".*-requirements.txt",
-    "*.bin",
-    "*.gitkeep",
-    ".venv/",
-    ".editorconfig",
-    ".github/",
-    "tasks.py"
-]
-
-[tool.pytest.ini_options]
-minversion = "6.0"
-# ATTN: Remove the cov options when using breakpoint() since it interferes
-addopts = '--isort --pydocstyle --pycodestyle --doctest-glob="*.rst" --doctest-modules --cov=invenio_subjects_mesh --cov-report=term-missing'
-testpaths = ["tests", "invenio_subjects_mesh"]
-
-[tool.pydocstyle]
-add_ignore = ["D401"]

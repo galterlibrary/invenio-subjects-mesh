@@ -1,5 +1,11 @@
 # Changes
 
+Version 2026.1.27.0 (released 2026-01-29)
+
+- MeSH 2026
+- Drop support for Python 3.9
+- Depend on invenio-subjects-mesh-common
+
 Version 2025.1.15.2 (released 2025-07-15)
 
 - Compatible with InvenioRDM v13
