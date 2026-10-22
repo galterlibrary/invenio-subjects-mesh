@@ -25,7 +25,7 @@ name = "invenio-subjects-mesh"
 readme = "README.md"
 requires-python = ">=3.11"
 urls = {Repository = "https://github.com/galterlibrary/invenio-subjects-mesh"}
-version = "2026.1.27.1"
+version = "2026.1.27.2"
 
 [project.optional-dependencies]
 dev = [
