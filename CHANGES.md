@@ -1,5 +1,10 @@
 # Changes
 
+Version 2026.10.22.0 (released 2026-10-23)
+
+- feat: update terms + update mesh-common 0.4.0
+    * mesh-common 0.4.0 changes what is downloaded, but interfaces stay the same
+
 Version 2026.1.27.1 (released 2026-08-11)
 
 - Make compatible with InvenioRDM v14
